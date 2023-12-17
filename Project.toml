@@ -3,8 +3,33 @@ uuid = "f9362594-96d2-44ac-89c4-94afa391cfb7"
 authors = ["Michael Myers"]
 version = "1.0.0-DEV"
 
+[deps]
+ArgParse = "c7e460c6-2fb9-53a9-8c5b-16f535851c63"
+Chain = "8be319e6-bccf-4806-a6f7-6fae938471bc"
+Clustering = "aaaa29a8-35af-508c-8bc3-b662a17a0fe5"
+Dates = "ade2ca70-3891-5945-98fb-dc099432e06a"
+Distances = "b4f34e82-e78d-54a5-968a-f98e89d6e8f7"
+JSON = "682c06a0-de6a-54ab-a142-c8b1cf79cde6"
+LinearAlgebra = "37e2e46d-f89d-539d-b4ee-838fcccc9c8e"
+MultivariateStats = "6f286f6a-111f-5878-ab1e-185364afe411"
+NamedArrays = "86f7a689-2022-50b4-a561-43c23ac3c673"
+PythonCall = "6099a3de-0909-46bc-b1f4-468b9a2dfc0d"
+StatsBase = "2913bbd2-ae8a-5f71-8c99-4fb6c76f3a91"
+
 [compat]
-julia = "1"
+ArgParse = "1.1"
+Chain = "0.5"
+Clustering = "0.15"
+Dates = "1"
+Distances = "0.10"
+JSON = "0.21"
+LinearAlgebra = "1"
+MultivariateStats = "0.10"
+NamedArrays = "0.10"
+Printf = "1"
+PythonCall = "0.9"
+StatsBase = "1"
+julia = "1.9"
 
 [extras]
 Test = "8dfed614-e22c-5e08-85e1-65c5234f0b40"
