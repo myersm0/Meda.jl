@@ -27,7 +27,7 @@ LinearAlgebra = "1"
 MultivariateStats = "0.10"
 NamedArrays = "0.10"
 PythonCall = "0.9"
-StatsBase = "1"
+StatsBase = "0.34"
 julia = "1.9"
 
 [extras]
