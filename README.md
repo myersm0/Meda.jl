@@ -2,7 +2,7 @@
 # Meda
 
 ## Description
-Idea: now in the age of NLP models that can achieve human-level performance on some tasks (notably for this purpose, semantic search), the old notion of a hierarchically organized user filesystem has become not only superfluous but also harmful to innovation. I don't know if this statement is absolutely true, but I think it's at least true within the limited context that I describe below.
+Idea: now in the age of NLP models that can achieve human-level performance on some tasks (notably for this purpose, semantic similarity judgments), the old notion of a hierarchically organized user filesystem has become not only superfluous but also harmful. I don't know if this statement is absolutely true, but I think it's at least true within the limited context that I describe below.
 
 To demonstrate an alternative, I present this experimental program that uses LLM-fueled semantic search and topic modeling in order to maintain, organize, and search a user-created, flat collection of directories with heterogeneous contents. It's deliberately _not_ production-ready; for example, every time you run this program it has to load the `sentence-BERT` model in Python, compile functions, etc, which is very inefficient for a small program like this that's designed to be run frequently from the command line. It's just intended as a proof of concept and as a working solution until something better comes along.
 
