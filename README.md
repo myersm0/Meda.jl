@@ -20,7 +20,9 @@ Furthermore, my approach gives each directory a _random, meaningless name_, by d
 ## Installation
 This package works best by building it into an relocatable binary.
 
-First, clone the repo or install it as a package in Julia:
+You may first have to do `pip install sentence_transformers` to install the required Python library. You may also need to install and build the Julia package `PythonCall` in such a way that it has access to the virtual environment (if any) in which `sentence_transformers` is accessible.
+
+Then clone the repo or install it as a package in Julia:
 ```
 using Pkg
 Pkg.install(url = "https://github.com/myersm0/Meda.jl")
@@ -47,7 +49,7 @@ I get the following (abbreviated) result:
 ▪ fe7a1d: React components and hooks for front-end development
   … (omitting 7 results)
 
-▪ **d58ad0**: Gallery of restored photographs from the Industrial Revolution
+▪ d58ad0: Gallery of restored photographs from the Industrial Revolution (***)
 ▪ 69b7db: Collection of advanced post-processing techniques in Adobe Photoshop
 ▪ 4cfa56: Guide to vintage camera collection and maintenance
   … (omitting 3 results)
@@ -57,13 +59,13 @@ I get the following (abbreviated) result:
 ▪ 4d30e0: Nutritional guides and meal plans for athletes
   … (omitting 5 results)
 
-▪ **b2054c**: Interactive timeline of significant scientific discoveries
-▪ **22610e**: Space exploration timelines and historical documents
-▪ **69575d**: Audiovisual materials on the space race of the 20th century
+▪ b2054c: Interactive timeline of significant scientific discoveries (***)
+▪ 22610e: Space exploration timelines and historical documents (***)
+▪ 69575d: Audiovisual materials on the space race of the 20th century (***)
   … (omitting 12 results)
 ```
 
-In each line in the result, we see a hexadecimal key (a random name for the folder containing some content) and a description of the contents of that folder. What's happening here is that the 70 `meta.json` files from the testing set are parsed and clustered into `k` topics. Each topic is sorted by relevance to my query, "great developments in technology." Those results that are among the `top_n` most relevant to my query are given in bold. For each topic, up to `n_per_group` results are shown, and then the rest are elided. (For brevity, only four of the seven topics are shown above.)
+In each line in the result, we see a hexadecimal key (a random name for the folder containing some content) and a description of the contents of the folder that it refers to. What's happening here is that the 70 `meta.json` files from my GPT-4-generated testing set are parsed and clustered into `k` topics. Each topic is sorted by relevance to my query, "great developments in technology." Those results that are among the `top_n` most relevant to my query are given in bold. For each topic, up to `n_per_group` results are shown, and then the rest are elided. (For brevity, only four of ten topics are shown above.) A nice additional feature would be to name each topic/cluster, but it may not be worth the runtime and development overhead for that.
 
 ## TODO
 There are several obvious next steps but which unfortunately I probably won't have the bandwidth to implement myself:
