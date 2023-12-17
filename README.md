@@ -38,25 +38,27 @@ Meda find --query="great developments in technology" --base_dir="./test/data/con
 ```
 
 I get the following (abbreviated) result:
-> ▪ 452cea: JavaScript snippets and libraries for interactive web applications
-> ▪ 0705d1: Responsive web design tutorials and best practices
-> ▪ fe7a1d: React components and hooks for front-end development
->   … (omitting 7 results)
->
-> ▪ **d58ad0**: Gallery of restored photographs from the Industrial Revolution
-> ▪ 69b7db: Collection of advanced post-processing techniques in Adobe Photoshop
-> ▪ 4cfa56: Guide to vintage camera collection and maintenance
->   … (omitting 3 results)
->
-> ▪ c28593: Compilation of quick and easy 30-minute meals
-> ▪ 192ae6: Dietary advice and recipes for weight loss and muscle gain
-> ▪ 4d30e0: Nutritional guides and meal plans for athletes
->   … (omitting 5 results)
->
-> ▪ **b2054c**: Interactive timeline of significant scientific discoveries
-> ▪ **22610e**: Space exploration timelines and historical documents
-> ▪ **69575d**: Audiovisual materials on the space race of the 20th century
->   … (omitting 12 results)
+```
+▪ 452cea: JavaScript snippets and libraries for interactive web applications
+▪ 0705d1: Responsive web design tutorials and best practices
+▪ fe7a1d: React components and hooks for front-end development
+  … (omitting 7 results)
+
+▪ **d58ad0**: Gallery of restored photographs from the Industrial Revolution
+▪ 69b7db: Collection of advanced post-processing techniques in Adobe Photoshop
+▪ 4cfa56: Guide to vintage camera collection and maintenance
+  … (omitting 3 results)
+
+▪ c28593: Compilation of quick and easy 30-minute meals
+▪ 192ae6: Dietary advice and recipes for weight loss and muscle gain
+▪ 4d30e0: Nutritional guides and meal plans for athletes
+  … (omitting 5 results)
+
+▪ **b2054c**: Interactive timeline of significant scientific discoveries
+▪ **22610e**: Space exploration timelines and historical documents
+▪ **69575d**: Audiovisual materials on the space race of the 20th century
+  … (omitting 12 results)
+```
 
 In each line in the result, we see a hexadecimal key (a random name for the folder containing some content) and a description of the contents of that folder. What's happening here is that the 70 `meta.json` files from the testing set are parsed and clustered into `k` topics. Each topic is sorted by relevance to my query, "great developments in technology." Those results that are among the `top_n` most relevant to my query are given in bold. For each topic, up to `n_per_group` results are shown, and then the rest are elided. (For brevity, only four of the seven topics are shown above.)
 
