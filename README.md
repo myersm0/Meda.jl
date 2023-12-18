@@ -2,25 +2,23 @@
 # Meda
 
 ## Description
-Idea: now in the age of NLP models that can achieve human-level performance on some tasks (notably for this purpose, semantic similarity judgments), the old notion of a hierarchically organized user filesystem has become not only superfluous but also harmful. I don't know if this statement is absolutely true, but I think it's at least true within the limited context that I describe below.
-
-To demonstrate an alternative, I present this experimental program that uses LLM-fueled semantic search and topic modeling in order to maintain, organize, and search a user-created, flat collection of directories with heterogeneous contents. It's deliberately _not_ production-ready; for example, every time you run this program it has to load the `sentence-BERT` model in Python, compile functions, etc, which is very inefficient for a small program like this that's designed to be run frequently from the command line. It's just intended as a proof of concept and as a working solution until something better comes along.
+This is an experimental program that uses LLM-fueled semantic search and topic modeling in order to maintain, organize, and search a user-created, flat collection of directories with heterogeneous contents. It's deliberately _not_ production-ready; for example, every time you run this program it has to load the `sentence-BERT` model in Python, compile functions, etc, which is very inefficient for a small program like this that's designed to be run frequently from the command line. It's just intended as a proof of concept and as a working solution until something better comes along.
 
 The semantic search aspect of this works very well, in my experience. The topic modeling part (based on a hierarchical clustering of PCA-reduced embeddings) is less successful, but good enough: in the test data I show that it fairly well recovers the original 7 topics that they were generated from (more on that below).
 
 ## Motivation
-In both my work and my personal life, I deal with a lot of projects of an exploratory or unpredictable nature. Some of them mature into bigger or more stable projects. Those that don't, there may still be value, but it may be unclear how to organize them, what are the common threads, etc. On top of that, there are innumerable things like datasets, models, course materials, notes, etc, that I'd like to keep track of. I've increasingly found that a traditional hierarchical organization for this kind of thing is not very satisfactory, for several reasons such as:
-- inflexible: while you may have chosen a good hierarchy for your content in the beginning, those choices will (in my experience) always come back to haunt you, leaving with you the burden of rearranging things or else living with that suboptimal arrangement. The former approach, rearranging, does little more than guarantee you'll continually revisit this same problem.
-- complex: if you have a fairly complex set of contents to manage, a hierarchical approach can create deep mazes of directories. This harms education (familiarizing new users with the file structure), retrieval (file paths become long and unwieldy), etc.
+I deal with a lot of projects of an exploratory or unpredictable nature. Some of them mature into bigger or more stable projects. Those that don't, there may still be value, but it may be unclear how to organize them, what are the common threads, etc. On top of that, there are innumerable things like datasets, models, course materials, notes, etc, that I'd like to keep track of. I've increasingly found that a traditional hierarchical organization for this kind of thing is not very satisfactory, for several reasons such as:
+- inflexible
+- complex (it can lead to deep mazes of directories and long file paths)
 
-My solution is to store practically everything that may be of a transient or unpredictable nature in a single directory called `content`. By "almost everything", I mean datasets, media, documents, code, etc. I make no distinction among those things, but rather leave it to metadata to capture the nature of groupings among things, in such a way that a semantic search can group the content for me, dynamically according to my needs in any given use case. Also there is almost no nesting of directories within `content`; the only exception is where there's a very strong organizational convention, such as grouping some code's contents into subfolders like `assets`, `src`, and `docs`, etc.
+My solution is to store practically everything that may be of a transient or unpredictable nature in a single directory called `content`. By "almost everything", I mean datasets, media, documents, code, etc. I make no distinction among those things, but rather leave it to metadata to capture the nature of groupings among them, in such a way that a semantic search can group the content for me dynamically according to my needs in any given use case. Also there's almost no nesting of directories within `content`; the only exception is where there's a very strong organizational convention, such as grouping some code's contents into subfolders like `assets`, `docs`, etc.
 
 Furthermore, my approach gives each directory a _random, meaningless name_, by default a 6-character hexademical string, which we'll refer to as a `key`. There are a few reasons for this:
 - unburdens you from having to choose a name for everything yourself (any name you choose will end up being the wrong one, I argue: because in the interest of brevity it can't fully capture all you need it to say, and because changing needs over time will invalidate whatever you choose anyway)
 - rewards user(s) for developing a rich set of metadata and docs for each item (because the semantic search capabilities are only as good as the materials that you feed into it)
 
 ## Installation
-This package works best by building it into an relocatable app via [PackageCompiler](https://julialang.github.io/PackageCompiler.jl/stable/apps.html#Creating-an-app).
+This package works best by building it into an relocatable app via [PackageCompiler.jl](https://julialang.github.io/PackageCompiler.jl/stable/apps.html#Creating-an-app).
 
 You may first have to do `pip install sentence_transformers` to install the required Python library. You may also need to install and build the Julia package `PythonCall` in such a way that it has access to the virtual environment (if any) in which `sentence_transformers` is accessible.
 
@@ -69,8 +67,14 @@ I get the following (abbreviated) result:
 
 In each line in the result, we see a hexadecimal key (a random name for the folder containing some content) and a description of the contents of the folder that it refers to. What's happening here is that the 70 `meta.json` files from my GPT-4-generated testing set are parsed and clustered into `k` topics. Each topic is sorted by relevance to my query, "great developments in technology." Those results that are among the `top_n` most relevant to my query are given in bold (denoted with `(***)` in the above due to Markdown limitations). For each topic, up to `n_per_group` results are shown, and then the rest are elided. For brevity, only four of ten topics are shown above.
 
+The parameters mentioned above (`k`, `top_n`, `n_per_group`) are all additional command lines args that you can specify, each with a default value of 5.
+
+To create a new `key` and a directory for it:
+```
+Meda create --purpose="My reason for creating this directory" --base_dir="~/content/"
+```
+
 ## TODO
 There are several obvious next steps but which unfortunately I probably won't have the bandwidth to implement myself:
-- name each topic/cluster
 - create a dependency graph of relationships among items
 - add comments from code into the body of metadata that gets searched
