@@ -78,5 +78,7 @@ Meda create --purpose="My reason for creating this directory" --base_dir="~/cont
 
 ## TODO
 There are several obvious next steps but which unfortunately I probably won't have the bandwidth to implement myself:
+- can we get better startup time by implementing it in Rust (for example)?
+- store vectors and metadata content in a serialized struct rather than reading them freshly each time?
 - create a dependency graph of relationships among items
 - add comments from code into the body of metadata that gets searched
