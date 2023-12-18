@@ -9,10 +9,6 @@ end
 
 function create(; purpose::String, base_dir::String, date::Union{String, Nothing} = nothing)
 	key = randhex(6)
-	if isnothing(date)
-		date = string(Dates.today())
-	end
-
 	dest = "$base_dir/$key/"
 	!isdir(dest) || error("Target directory $key already exists")
 	run(`mkdir -p $dest`)
@@ -21,7 +17,7 @@ function create(; purpose::String, base_dir::String, date::Union{String, Nothing
 		:key => key,
 		:purpose => purpose,
 		:author => ENV["USER"],
-		:created => date,
+		:created => isnothing(date) ? string(Dates.today()) : date
 	)
 
 	outname = "$dest/meta.json"

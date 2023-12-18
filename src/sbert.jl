@@ -1,9 +1,9 @@
 
-function cos_sim(a, b)
+function cos_sim(a::AbstractVector, b::AbstractVector)
 	return dot(a, b) / (norm(a) * norm(b))
 end
 
-function load_sbert(model_name = "all-mpnet-base-v2")
+function load_sbert(model_name::String = "all-mpnet-base-v2")
 	return pyimport("sentence_transformers").SentenceTransformer(model_name)
 end
 
