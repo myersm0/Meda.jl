@@ -30,11 +30,9 @@ function print_results(
 				purpose = "$(purpose[1:(maxchar - 2)]) …"
 			end
 			print("▪ ")
-			if ind in matches
-				printstyled(meta["key"]; bold = true, underline = true)
-			else
-				print(meta["key"])
-			end
+			bold = ind in matches
+			underline = bold
+			printstyled(meta["key"]; bold = bold, underline = underline)
 			println(": $purpose")
 		end
 		println()

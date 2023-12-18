@@ -1,7 +1,7 @@
 
 using NamedArrays
 
-function julia_main()::Cint
+function arg_parse_wrapper(args)
 	s = ArgParseSettings()
 	@add_arg_table! s begin
 		"program"
@@ -39,7 +39,11 @@ function julia_main()::Cint
 			arg_type = Int
 			default = 5
 	end
-	args = parse_args(s; as_symbols = true)
+	return parse_args(s; as_symbols = true)
+end
+
+function julia_main()::Cint
+	args = arg_parse_wrapper(ARGS)
 
 	if args[:program] == :find
 		haskey(args, :query) || error(KeyError)
