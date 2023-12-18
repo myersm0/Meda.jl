@@ -2,7 +2,9 @@
 # Meda
 
 ## Description
-This is an experimental program that uses LLM-fueled semantic search and topic modeling in order to maintain, organize, and search a user-created, flat collection of directories with heterogeneous contents. It's deliberately _not_ production-ready; for example, every time you run this program it has to load the `sentence-BERT` model in Python, compile functions, etc, which is very inefficient for a small program like this that's designed to be run frequently from the command line. It's just intended as a proof of concept and as a working solution until something better comes along.
+A controversial idea: now, in the age of NLP models that can achieve human-level performance in judgments of semantic similarity, the old notion of a hierarchically organized user filesystem has become not only superfluous but also harmful. I don't know if this statement is absolutely true, but I think it's at least true within the limited context that I describe below.
+
+To demonstrate an alternative, I present this experimental program that uses LLM-fueled semantic search and topic modeling in order to maintain, organize, and search a user-created, flat collection of directories with heterogeneous contents. It's deliberately _not_ production-ready; for example, every time you run this program it has to load the `sentence-BERT` model in Python, compile functions, etc, which is very inefficient for a small program like this that's designed to be run frequently from the command line. It's just intended as a proof of concept and as a working solution until something better comes along.
 
 The semantic search aspect of this works very well, in my experience. The topic modeling part (based on a hierarchical clustering of PCA-reduced embeddings) is less successful, but good enough: in the test data I show that it fairly well recovers the original 7 topics that they were generated from (more on that below).
 
